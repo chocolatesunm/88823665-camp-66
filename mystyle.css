@@ -127,6 +127,6 @@ form:hover {
     transition: background-color 0.3s;
 }
 input:focus, textarea:focus {
-    border: 2px solid rgb(255, 192, 240); /* กำหนดกรอบสีชมพูเมื่อฟอร์มถูกโฟกัส */
+    border: 2px solid pink; /* กำหนดกรอบสีชมพูเมื่อฟอร์มถูกโฟกัส */
     outline: none; /* ลบเส้นขอบที่เกิดจากการโฟกัส */
 }
