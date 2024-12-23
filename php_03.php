@@ -18,8 +18,8 @@
         </form>
 
         <?php
-        if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["number"])) { //ตรวจสอบว่ามีดารส่งฟอร์มและรับค่าจากฟอร์ม>
-            $number = intval($_POST["number"]); // รับค่าแม่สูตรคูณ แปลงค่าที่ระบมาเป็นจำนวนเต็มด้วย intval
+        if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["number"])) { //ตรวจสอบว่ามีการส่งฟอร์มและรับค่าจากฟอร์ม>
+            $number = intval($_POST["number"]); // รับค่าแม่สูตรคูณ แปลงค่าที่ัะบมาเป็นจำนวนเต็มด้วย intval
             if ($number >= 1 && $number <= 12) {
                 echo '<h2 class="mt-4">ตารางสูตรคูณแม่ ' . $number . '</h2>';
                  //. $number . หมายถึง การนำค่าของตัวแปร $number มาต่อกับข้อความที่อยู่ก่อนหน้า และข้อความที่อยู่ถัดไป (</h2>)
