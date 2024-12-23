@@ -9,7 +9,7 @@
 <body>
     <div class="container mt-5">
         <h1>แสดงตารางสูตรคูณ</h1>
-        <form method="post" action="php_03.php"><!--method post เพื่อรับแม่ส฿ตรคูณจากผู้ใช้งาน-->
+        <form method="post" action="php_03.php"><!--method post เพื่อรับแม่สูตรคูณจากผู้ใช้งาน-->
             <div class="mb-3">
                 <label for="multiplicationTable" class="form-label">กรอกแม่สูตรคูณ</label>
                 <input type="number" name="number" class="form-control" id="multiplicationTable" placeholder="ระบุแม่สูตรคูณ (1-12)" required>
