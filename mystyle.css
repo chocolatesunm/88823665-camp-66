@@ -3,9 +3,9 @@
 /*จัดหน้ากระดาษ*/
 form {
     display: grid;
-    grid-template-columns: max-content 1fr;
+    grid-template-columns: max-content auto;
     gap: 10px;
-    align-items: center;
+    align-items: start;
 }
 
 label {
@@ -129,4 +129,28 @@ form:hover {
 input:focus, textarea:focus {
     border: 2px solid rgb(255, 192, 240); /* กำหนดกรอบสีชมพูเมื่อฟอร์มถูกโฟกัส */
     outline: none; /* ลบเส้นขอบที่เกิดจากการโฟกัส */
+}
+
+/* Group for vertical alignment of radio buttons */
+.radio-group-vertical {
+    display: flex;
+    flex-direction: column; /* Align items vertically */
+    gap: 5px; /* Add spacing between options */
+   
+}
+
+.radio-group-vertical label {
+    margin-left: 5px; /* Add spacing between radio button and label */
+    display: inline; /* Keep label inline with the button */
+}
+
+input[type="radio"] {
+    accent-color: #ff488b;
+    margin: 0px; /* Add spacing between the button and its label */
+}
+.forms-group {
+    display: grid;
+    grid-template-columns: max-content auto; /* Align label and content in columns */
+    gap: 80px; /* Add spacing between label and group */
+    align-items: start; /* Align label with the first radio button ก็คือตรงกับปุ่มแรก*/
 }
