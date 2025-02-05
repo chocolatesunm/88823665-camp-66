@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
     //
-    function home(){
+    function index()
+    {
         return view('home');
     }
 }
