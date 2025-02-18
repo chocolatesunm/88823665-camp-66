@@ -1,11 +1,23 @@
 <?php
 
+use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MyController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProductController;
+use App\http\Middleware\CheckLogin;
+
+
+Route::get('/product', [ProductController::class, 'index'])
+->middleware ([CheckLogin::class]);
+Route::post('/product', [ProductController::class, 'store'])
+->middleware ([CheckLogin::class]);
+Route::delete('/product/{id}', [ProductController::class, 'distroy'])
+->middleware ([CheckLogin::class]);
+
 
 
 Route::get('/home',
