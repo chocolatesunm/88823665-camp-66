@@ -15,7 +15,9 @@ class CheckLogin
      */
     public function handle(Request $request, Closure $next): Response
     {
+        if (!session()->has('user')) {
+            return redirect('login');
+        }
         return $next($request);
     }
 }
-//check เข้า หน้า home จะเช็คว่ามี seseion user หรือไม่ ถ้าไม่มีจะ redirect ไปหน้า login

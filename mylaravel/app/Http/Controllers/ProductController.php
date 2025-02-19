@@ -19,7 +19,7 @@ class ProductController extends Controller
 
     public function store(Request $req)
     {
-          // ตรวจสอบว่าได้ล็อกอินแล้วหรือไม่
+        // ตรวจสอบว่าได้ล็อกอินแล้วหรือไม่
         // ตรวจสอบและ validate ข้อมูล
         $req->validate([
             'category' => 'required|string|max:255',
@@ -29,7 +29,7 @@ class ProductController extends Controller
 
         // สร้างหมวดหมู่ใหม่
         $user = session()->get('user');
-        $category = Categories::create([
+        $category = Categories::create(attributes: [
             'name' => $req->category,
         ]);
 
@@ -38,7 +38,7 @@ class ProductController extends Controller
             ProductList::create([
                 'name' => $value,
                 'category_id' => $category->id,
-                'user_id' => auth()->$user->id,
+                'user_id' => $user->id,
             ]);
         }
 
@@ -46,7 +46,7 @@ class ProductController extends Controller
         $products = ProductList::with('category', 'user')->get();
 
         // ส่งข้อมูลกลับไปแสดงในหน้าจอ
-        return view('product.index', compact('products'));
+        return view('product', compact('products'));
     }
 }
 
@@ -70,4 +70,3 @@ class ProductController extends Controller
         }
     }
 }*/
-

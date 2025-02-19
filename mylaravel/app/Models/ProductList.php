@@ -8,7 +8,7 @@ class ProductList extends Model
 {
     protected $table = 'product_lists'; // ชื่อตาราง
     public $timestamps = false; // ปิดการใช้งาน created_at และ updated_at
-
+    protected $fillable = ['name', 'category_id', 'user_id']; // กำหนดให้สามารถเพิ่มข้อมูลได้ในคอลัมน์ name, category_id, user_id
     public function category()
     {
         return $this->belongsTo(Categories::class, 'category_id');

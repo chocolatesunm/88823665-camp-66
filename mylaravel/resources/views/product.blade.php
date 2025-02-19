@@ -37,14 +37,21 @@
         </tr>
     </thead>
     <tbody>
-        $products = App\Models\Product::all();
-        @foreach($products as $index => $product)
-        <tr>
-            <td>{{ $index + 1 }}</td>
-            <td>{{ $product->category->name }}</td>
-            <td>{{ $product->name }}</td>
-            <td>{{ $product->user->name}}</td> <!-- แสดงชื่อผู้ใช้ -->
-        </tr>
+    @php
+            $categories = $products->groupBy('category_id'); // จัดกลุ่มตาม category_id
+            $count = 1;
+        @endphp
+        @foreach($categories as $category_id => $products)
+            <tr>
+                <td>{{ $count++ }}</td>
+                <td>{{ $products[0]->category->name }}</td>
+                <td>
+                    @foreach($products as $product)
+                    &nbsp;&nbsp;• {{ $product->name }}<br>
+                    @endforeach
+                </td>
+                <td>{{ $products[0]->user->name }}</td> <!-- แสดงชื่อผู้ใช้ -->
+            </tr>
         @endforeach
     </tbody>
 </table>
@@ -53,28 +60,34 @@
 @section('scripts')
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    $(document).ready(function() {
-        var count = 1; // ตัวนับรายการสินค้า
+   $(document).ready(function() {
+    // ฟังก์ชันเพิ่มช่องใส่สินค้า
+    $('#btn-add-product').on('click', function() {
+        let count = $('#add-product .product-item').length + 1; // นับจำนวนสินค้าใหม่
 
-        // ฟังก์ชันเพิ่มช่องใส่สินค้า
-        $('#btn-add-product').on('click', function() {
-            count = $('#add-product .product-item').length + 1; // คำนวณจำนวนสินค้าในปัจจุบัน
-
-            $('#add-product').append(`
-                <div class="col-6 mt-2 product-item">
-                    <label class="form-label">${count}. ชื่อสินค้า:</label>
-                    <div class="input-group">
-                        <input type="text" name="product_name[]" class="form-control" placeholder="กรอกชื่อสินค้า" required>
-                        <button type="button" class="btn btn-danger btn-delete-product">ลบ</button>
-                    </div>
+        $('#add-product').append(`
+            <div class="col-6 mt-2 product-item">
+                <label class="form-label product-number">${count}. ชื่อสินค้า:</label>
+                <div class="input-group">
+                    <input type="text" name="product_name[]" class="form-control" placeholder="กรอกชื่อสินค้า" required>
+                    <button type="button" class="btn btn-danger btn-delete-product">ลบ</button>
                 </div>
-            `);
-        });
-
-        // ฟังก์ชันลบสินค้า
-        $(document).on('click', '.btn-delete-product', function() {
-            $(this).closest('.product-item').remove();
-        });
+            </div>
+        `);
     });
+
+    // ฟังก์ชันลบสินค้า
+    $(document).on('click', '.btn-delete-product', function() {
+        $(this).closest('.product-item').remove(); // ลบสินค้าออกจาก DOM
+        updateProductNumbers(); // อัปเดตหมายเลขสินค้าใหม่
+    });
+
+    // ฟังก์ชันอัปเดตหมายเลขสินค้าให้เรียงใหม่
+    function updateProductNumbers() {
+        $('#add-product .product-item').each(function(index) {
+            $(this).find('.product-number').text((index + 1) + ". ชื่อสินค้า:");
+        });
+    }
+});
 </script>
 @endsection
